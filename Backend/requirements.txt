@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pypdf2
+chromadb
+openai  # Optional, only if using GPT for RAG or skills
+python-dotenv
