@@ -24,7 +24,7 @@ function ResumeAnalyzer() {
 
     try {
       const res = await axios.post("http://localhost:8000/analyze/", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { "Content-Type": "multipart/form-data" },
       });
       setResult(res.data);
     } catch (err) {
@@ -34,17 +34,31 @@ function ResumeAnalyzer() {
   };
 
   return (
-    <div className={`min-h-screen ${gradientBg} flex flex-col items-center justify-center px-2 py-10 relative overflow-x-hidden`}>
+    <div
+      className={`min-h-screen ${gradientBg} flex flex-col items-center justify-center px-2 py-10 relative overflow-x-hidden`}
+    >
       {/* Animated background bubbles */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <div className="absolute w-72 h-72 bg-purple-300 opacity-30 rounded-full mix-blend-multiply blur-2xl animate-pulse" style={{ top: "8%", left: "-10%" }} />
-        <div className="absolute w-56 h-56 bg-blue-200 opacity-20 rounded-full mix-blend-multiply blur-2xl animate-pulse" style={{ top: "55%", right: "-12%" }} />
-        <div className="absolute w-40 h-40 bg-fuchsia-300 opacity-30 rounded-full mix-blend-multiply blur-2xl animate-pulse" style={{ bottom: "5%", left: "60%" }} />
+        <div
+          className="absolute w-72 h-72 bg-purple-300 opacity-30 rounded-full mix-blend-multiply blur-2xl animate-pulse"
+          style={{ top: "8%", left: "-10%" }}
+        />
+        <div
+          className="absolute w-56 h-56 bg-blue-200 opacity-20 rounded-full mix-blend-multiply blur-2xl animate-pulse"
+          style={{ top: "55%", right: "-12%" }}
+        />
+        <div
+          className="absolute w-40 h-40 bg-fuchsia-300 opacity-30 rounded-full mix-blend-multiply blur-2xl animate-pulse"
+          style={{ bottom: "5%", left: "60%" }}
+        />
       </div>
       {/* Glassy Card */}
       <div className="z-10 w-full max-w-xl">
         <h1 className="text-4xl font-extrabold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-700 via-purple-600 to-fuchsia-600 drop-shadow-md">
-         SkillSync <span className="block text-lg font-medium mt-1 tracking-widest">AI Career Advisor</span>
+          SkillSync{" "}
+          <span className="block text-lg font-medium mt-1 tracking-widest">
+            AI Career Advisor
+          </span>
         </h1>
         <form
           className="bg-white bg-opacity-70 shadow-xl rounded-3xl px-8 py-7 flex flex-col gap-6 border-[1.5px] border-blue-100 backdrop-blur-md"
@@ -54,17 +68,29 @@ function ResumeAnalyzer() {
             Resume (PDF)
             <div className="flex items-center gap-2 mt-1 bg-blue-50 border-2 border-dashed border-blue-300 rounded-xl px-4 py-3 cursor-pointer hover:bg-blue-100 transition-all">
               <svg width="24" height="24" fill="none" className="text-blue-400">
-                <path d="M12 16v-8m0 8-4-4m4 4 4-4M20 12.5A8.5 8.5 0 1 1 3.5 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M12 16v-8m0 8-4-4m4 4 4-4M20 12.5A8.5 8.5 0 1 1 3.5 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
               <input
                 type="file"
                 accept="application/pdf"
-                onChange={e => setResume(e.target.files[0])}
+                onChange={(e) => setResume(e.target.files[0])}
                 className="hidden"
                 id="resume-upload"
               />
               <label htmlFor="resume-upload" className="w-full cursor-pointer">
-                {resume ? <span className="text-blue-700 font-semibold">{resume.name}</span> : <span className="text-blue-400">Click or Drag PDF here</span>}
+                {resume ? (
+                  <span className="text-blue-700 font-semibold">
+                    {resume.name}
+                  </span>
+                ) : (
+                  <span className="text-blue-400">Click or Drag PDF here</span>
+                )}
               </label>
             </div>
           </label>
@@ -75,7 +101,7 @@ function ResumeAnalyzer() {
               className="w-full border rounded-xl p-3 mt-1 shadow-inner focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
               placeholder="Paste the job description here..."
               value={jd}
-              onChange={e => setJD(e.target.value)}
+              onChange={(e) => setJD(e.target.value)}
               required
             />
           </label>
@@ -99,8 +125,17 @@ function ResumeAnalyzer() {
         {result && (
           <div className="mt-10 mb-6 w-full animate-fade-in bg-white bg-opacity-85 p-7 rounded-3xl shadow-2xl border border-blue-100 z-20">
             <h2 className="text-2xl font-bold mb-4 text-blue-800 flex items-center gap-2">
-              <svg width="24" height="24" fill="none" className="text-purple-400">
-                <path d="M13 5.055a7 7 0 1 1-2 0" stroke="currentColor" strokeWidth="2.2" />
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                className="text-purple-400"
+              >
+                <path
+                  d="M13 5.055a7 7 0 1 1-2 0"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                />
                 <path d="M12 3v10" stroke="currentColor" strokeWidth="2.2" />
               </svg>
               AI-Powered Resume Analysis
@@ -111,35 +146,47 @@ function ResumeAnalyzer() {
               <div className="mb-4">
                 <div className="text-md mb-1 text-gray-600 flex justify-between">
                   <span>AI Resume Match Score</span>
-                  <span className="font-bold text-blue-600">{result.overall_score}%</span>
+                  <span className="font-bold text-blue-600">
+                    {result.overall_score}/10
+                  </span>
                 </div>
                 <div className="w-full bg-blue-100 rounded-full h-4 overflow-hidden">
-                  <div className="h-4 bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 rounded-full transition-all"
-                    style={{ width: `${result.overall_score}%` }} />
+                  <div
+                    className="h-4 bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 rounded-full transition-all"
+                    style={{ width: `${result.overall_score * 10}%` }}
+                  />
                 </div>
               </div>
             )}
 
             {/* Skill Gap */}
             <div className="mb-4">
-              <h3 className="text-lg font-semibold mb-1 text-purple-700">Skill Gap Analysis</h3>
+              <h3 className="text-lg font-semibold mb-1 text-purple-700">
+                Skill Gap Analysis
+              </h3>
               <div className="grid md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <b className="text-blue-600">Required Skills</b>
                   <ul className="mt-1 list-disc ml-5">
-                    {result.skill_gap_analysis?.required_skills?.map(s => <li key={s}>{s}</li>)}
+                    {result.skill_gap_analysis?.required_skills?.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
                   </ul>
                 </div>
                 <div>
                   <b className="text-green-700">Your Skills</b>
                   <ul className="mt-1 list-disc ml-5">
-                    {result.skill_gap_analysis?.present_skills?.map(s => <li key={s}>{s}</li>)}
+                    {result.skill_gap_analysis?.present_skills?.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
                   </ul>
                 </div>
                 <div>
                   <b className="text-red-600">Missing Skills</b>
                   <ul className="mt-1 list-disc ml-5">
-                    {result.skill_gap_analysis?.missing_skills?.map(s => <li key={s}>{s}</li>)}
+                    {result.skill_gap_analysis?.missing_skills?.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -147,38 +194,52 @@ function ResumeAnalyzer() {
 
             {/* Suggestions */}
             <div className="mb-4">
-              <h3 className="text-lg font-semibold text-purple-700 mb-1">Personalized Improvement Suggestions</h3>
+              <h3 className="text-lg font-semibold text-purple-700 mb-1">
+                Personalized Improvement Suggestions
+              </h3>
               <ul className="list-disc ml-5 space-y-2">
-                {result.improvement_suggestions?.map(sug =>
+                {result.improvement_suggestions?.map((sug) => (
                   <li key={sug.skill}>
-                    <span className="font-bold text-blue-700">{sug.skill}:</span> {sug.suggestion}
+                    <span className="font-bold text-blue-700">
+                      {sug.skill}:
+                    </span>{" "}
+                    {sug.suggestion}
                     {sug.rag_example && (
-                      <span className="block text-xs text-gray-400 mt-1">e.g. <i>{sug.rag_example}</i></span>
+                      <span className="block text-xs text-gray-400 mt-1">
+                        e.g. <i>{sug.rag_example}</i>
+                      </span>
                     )}
                   </li>
-                )}
+                ))}
               </ul>
             </div>
 
             {/* Formatting Feedback */}
             {result.formatting_feedback && (
               <div className="mb-4">
-                <h3 className="text-lg font-semibold text-purple-700 mb-1">Formatting & Structure Tips</h3>
-                <div className="p-3 rounded-xl bg-blue-50 text-blue-900">{result.formatting_feedback}</div>
+                <h3 className="text-lg font-semibold text-purple-700 mb-1">
+                  Formatting & Structure Tips
+                </h3>
+                <div className="p-3 rounded-xl bg-blue-50 text-blue-900">
+                  {result.formatting_feedback}
+                </div>
               </div>
             )}
 
             {/* Personalized Roadmap */}
-            {result.personalized_roadmap && result.personalized_roadmap.length > 0 && (
-              <div>
-                <h3 className="text-lg font-semibold text-purple-700 mb-1">Personalized Roadmap</h3>
-                <ol className="list-decimal ml-6 space-y-1">
-                  {result.personalized_roadmap.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ol>
-              </div>
-            )}
+            {result.personalized_roadmap &&
+              result.personalized_roadmap.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-purple-700 mb-1">
+                    Personalized Roadmap
+                  </h3>
+                  <ol className="list-decimal ml-6 space-y-1">
+                    {result.personalized_roadmap.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ol>
+                </div>
+              )}
 
             {/* Summary */}
             {result.summary && (
